@@ -53,7 +53,7 @@ namespace LabTask
 
         private void button1_Click(object sender, EventArgs e)
         {
-            /*SqlConnection con = new SqlConnection("Data Source=DESKTOP-HER71UT;Initial Catalog=LabTask;Integrated Security=True");
+            SqlConnection con = new SqlConnection("Data Source=DESKTOP-HER71UT;Initial Catalog=LabTask;Integrated Security=True");
             //var con = Configuration.getInstance().getConnection();
             SqlCommand cmd = new SqlCommand("Insert into StudentData values (@RegistrationNo, @Name, @Department, @Session, @CGPA, @Address)", con);
             //cmd.Parameters.AddWithValue("@ID", int.Parse(regNoBox.Text));
@@ -67,7 +67,7 @@ namespace LabTask
             con.Open();
             cmd.ExecuteReader();
             con.Close();
-            MessageBox.Show("Successfully saved");*/
+            MessageBox.Show("Successfully saved");
         }
 
         private void label6_Click(object sender, EventArgs e)
