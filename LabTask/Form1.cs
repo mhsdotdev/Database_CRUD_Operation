@@ -21,9 +21,9 @@ namespace LabTask
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            /*GetStudentData();
+            GetStudentData();
             deleteButton.Enabled = false;
-            editButton.Enabled = false;*/
+            editButton.Enabled = false;
         }
 
         private void GetStudentData()
@@ -93,14 +93,14 @@ namespace LabTask
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {/*
+        {
             regNoBox.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
             nameBox.Text = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
             deptBox.Text = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
             sessionBox.Text = dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
             cgpaBox.Text = dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
             addressBox.Text = dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
-        */}
+        }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
@@ -137,12 +137,12 @@ namespace LabTask
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
-        {/*
+        {
             if (searchBox.Text.Contains(""))
             {
                 deleteButton.Enabled = false;
                 editButton.Enabled = false;
-            }*/
+            }
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -153,8 +153,8 @@ namespace LabTask
         private void searchButton_Click(object sender, EventArgs e)
         {
             
-            //deleteButton.Enabled = true;
-            //editButton.Enabled = true;
+            deleteButton.Enabled = true;
+            editButton.Enabled = true;
         }
     }
 }
