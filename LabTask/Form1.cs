@@ -38,7 +38,7 @@ namespace LabTask
 
         private void button2_Click(object sender, EventArgs e)
         {
-            /*SqlConnection con = new SqlConnection("Data Source=DESKTOP-HER71UT;Initial Catalog=LabTask;Integrated Security=True");
+            SqlConnection con = new SqlConnection("Data Source=DESKTOP-HER71UT;Initial Catalog=LabTask;Integrated Security=True");
             //var con = Configuration.getInstance().getConnection();
             SqlCommand cmd = new SqlCommand("Select * from StudentData", con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -48,7 +48,7 @@ namespace LabTask
             SqlDataReader sdr = cmd.ExecuteReader();
             dt.Load(sdr);
             con.Close();
-            dataGridView1.DataSource = dt;*/
+            dataGridView1.DataSource = dt;
         }
 
         private void button1_Click(object sender, EventArgs e)
