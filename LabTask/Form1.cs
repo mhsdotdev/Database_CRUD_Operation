@@ -39,11 +39,9 @@ namespace LabTask
         private void button2_Click(object sender, EventArgs e)
         {
             SqlConnection con = new SqlConnection("Data Source=DESKTOP-HER71UT;Initial Catalog=LabTask;Integrated Security=True");
-            //var con = Configuration.getInstance().getConnection();
             SqlCommand cmd = new SqlCommand("Select * from StudentData", con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
-            //_ = da.Fill(dt);
             con.Open();
             SqlDataReader sdr = cmd.ExecuteReader();
             dt.Load(sdr);
@@ -56,14 +54,12 @@ namespace LabTask
             SqlConnection con = new SqlConnection("Data Source=DESKTOP-HER71UT;Initial Catalog=LabTask;Integrated Security=True");
             //var con = Configuration.getInstance().getConnection();
             SqlCommand cmd = new SqlCommand("Insert into StudentData values (@RegistrationNo, @Name, @Department, @Session, @CGPA, @Address)", con);
-            //cmd.Parameters.AddWithValue("@ID", int.Parse(regNoBox.Text));
             cmd.Parameters.AddWithValue("@RegistrationNo", regNoBox.Text);
             cmd.Parameters.AddWithValue("@Name", nameBox.Text);
             cmd.Parameters.AddWithValue("@Department", deptBox.Text);
             cmd.Parameters.AddWithValue("@Session", int.Parse(sessionBox.Text));
             cmd.Parameters.AddWithValue("@CGPA", float.Parse(cgpaBox.Text));
             cmd.Parameters.AddWithValue("@Address", addressBox.Text);
-            //cmd.ExecuteNonQuery();
             con.Open();
             cmd.ExecuteReader();
             con.Close();
@@ -82,14 +78,14 @@ namespace LabTask
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-            /*regNoBox.Clear();
+            regNoBox.Clear();
             nameBox.Clear();
             deptBox.Clear();
             sessionBox.Clear();
             cgpaBox.Clear();
             addressBox.Clear();
             regNoBox.Focus();
-            */
+            
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -99,26 +95,23 @@ namespace LabTask
             deptBox.Text = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
             sessionBox.Text = dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
             cgpaBox.Text = dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
-            addressBox.Text = dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
+            //addressBox.Text = dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
         }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-           /* SqlConnection con = new SqlConnection("Data Source=DESKTOP-HER71UT;Initial Catalog=LabTask;Integrated Security=True");
-            //var con = Configuration.getInstance().getConnection();
-            SqlCommand cmd = new SqlCommand("UPDATE StudentData SET RegistrationNo=@RegistrationNo, Name=@Name, Department=@Department,Session=@Session, CGPA=@CGPA, Address=Multan)", con);
-            //cmd.Parameters.AddWithValue("@ID", int.Parse(regNoBox.Text));
+            SqlConnection con = new SqlConnection("Data Source=DESKTOP-HER71UT;Initial Catalog=LabTask;Integrated Security=True");
+            SqlCommand cmd = new SqlCommand("UPDATE StudentData SET RegistrationNo=@RegistrationNo, Name=@Name, Department=@Department,Session=@Session, CGPA=@CGPA WHERE RegistrationNo=@RegistrationNo", con);
             cmd.Parameters.AddWithValue("@RegistrationNo", regNoBox.Text);
             cmd.Parameters.AddWithValue("@Name", nameBox.Text);
             cmd.Parameters.AddWithValue("@Department", deptBox.Text);
             cmd.Parameters.AddWithValue("@Session", int.Parse(sessionBox.Text));
             cmd.Parameters.AddWithValue("@CGPA", float.Parse(cgpaBox.Text));
             cmd.Parameters.AddWithValue("@Address", addressBox.Text);
-            //cmd.ExecuteNonQuery();
             con.Open();
             cmd.ExecuteReader();
             con.Close();
-            MessageBox.Show("Successfully Updated");*/
+            MessageBox.Show("Successfully Updated");
         }
 
         private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
@@ -147,7 +140,13 @@ namespace LabTask
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            
+            SqlConnection con = new SqlConnection("Data Source=DESKTOP-HER71UT;Initial Catalog=LabTask;Integrated Security=True");
+            SqlCommand cmd = new SqlCommand("DELETE FROM StudentData WHERE RegistrationNo=@RegistrationNo", con);
+            cmd.Parameters.AddWithValue("@RegistrationNo", regNoBox.Text);
+            con.Open();
+            cmd.ExecuteReader();
+            con.Close();
+            MessageBox.Show("Successfully Deleted");
         }
 
         private void searchButton_Click(object sender, EventArgs e)
@@ -155,6 +154,18 @@ namespace LabTask
             
             deleteButton.Enabled = true;
             editButton.Enabled = true;
+
+            SqlConnection con = new SqlConnection("Data Source=DESKTOP-HER71UT;Initial Catalog=LabTask;Integrated Security=True");
+            SqlCommand cmd = new SqlCommand("SELECT *FROM StudentData WHERE " + searchBox.Text + " = @RegistrationNo", con);
+            cmd.Parameters.AddWithValue("@RegistrationNo", regNoBox.Text);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            con.Open();
+            SqlDataReader sdr = cmd.ExecuteReader();
+            dt.Load(sdr);
+            con.Close();
+            dataGridView1.DataSource = dt;
+
         }
     }
 }
