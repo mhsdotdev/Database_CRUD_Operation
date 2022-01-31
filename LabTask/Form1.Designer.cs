@@ -51,8 +51,8 @@ namespace LabTask
             this.deleteButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.searchBox = new System.Windows.Forms.TextBox();
             this.searchButton = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -314,15 +314,6 @@ namespace LabTask
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click_1);
             // 
-            // searchBox
-            // 
-            this.searchBox.Location = new System.Drawing.Point(430, 253);
-            this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(117, 23);
-            this.searchBox.TabIndex = 10;
-            this.searchBox.Text = " ";
-            this.searchBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
             // searchButton
             // 
             this.searchButton.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -334,13 +325,21 @@ namespace LabTask
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(430, 253);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(117, 23);
+            this.textBox1.TabIndex = 12;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(702, 520);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.searchButton);
-            this.Controls.Add(this.searchBox);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.editButton);
             this.Controls.Add(this.deleteButton);
@@ -395,8 +394,8 @@ namespace LabTask
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button editButton;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.TextBox searchBox;
         private System.Windows.Forms.Button searchButton;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

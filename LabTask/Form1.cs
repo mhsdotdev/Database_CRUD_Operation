@@ -39,13 +39,11 @@ namespace LabTask
         private void button2_Click(object sender, EventArgs e)
         {
             SqlConnection con = new SqlConnection("Data Source=DESKTOP-HER71UT;Initial Catalog=LabTask;Integrated Security=True");
+         //   var con = Configuration.getInstance().getConnection();
             SqlCommand cmd = new SqlCommand("Select * from StudentData", con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
-            con.Open();
-            SqlDataReader sdr = cmd.ExecuteReader();
-            dt.Load(sdr);
-            con.Close();
+            da.Fill(dt);
             dataGridView1.DataSource = dt;
         }
 
@@ -58,7 +56,7 @@ namespace LabTask
             cmd.Parameters.AddWithValue("@Name", nameBox.Text);
             cmd.Parameters.AddWithValue("@Department", deptBox.Text);
             cmd.Parameters.AddWithValue("@Session", int.Parse(sessionBox.Text));
-            cmd.Parameters.AddWithValue("@CGPA", float.Parse(cgpaBox.Text));
+            cmd.Parameters.AddWithValue("@CGPA", double.Parse(cgpaBox.Text));
             cmd.Parameters.AddWithValue("@Address", addressBox.Text);
             con.Open();
             cmd.ExecuteReader();
@@ -90,12 +88,12 @@ namespace LabTask
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            regNoBox.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
-            nameBox.Text = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
-            deptBox.Text = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
-            sessionBox.Text = dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
-            cgpaBox.Text = dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
-            //addressBox.Text = dataGridView1.SelectedRows[0].Cells[6].Value.ToString();
+            regNoBox.Text = dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+            nameBox.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+            deptBox.Text = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+            sessionBox.Text = dataGridView1.SelectedRows[0].Cells[3].Value.ToString();
+            cgpaBox.Text = dataGridView1.SelectedRows[0].Cells[4].Value.ToString();
+            addressBox.Text = dataGridView1.SelectedRows[0].Cells[5].Value.ToString();
         }
 
         private void button2_Click_1(object sender, EventArgs e)
@@ -106,7 +104,7 @@ namespace LabTask
             cmd.Parameters.AddWithValue("@Name", nameBox.Text);
             cmd.Parameters.AddWithValue("@Department", deptBox.Text);
             cmd.Parameters.AddWithValue("@Session", int.Parse(sessionBox.Text));
-            cmd.Parameters.AddWithValue("@CGPA", float.Parse(cgpaBox.Text));
+            cmd.Parameters.AddWithValue("@CGPA", double.Parse(cgpaBox.Text));
             cmd.Parameters.AddWithValue("@Address", addressBox.Text);
             con.Open();
             cmd.ExecuteReader();
@@ -131,11 +129,7 @@ namespace LabTask
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (searchBox.Text.Contains(""))
-            {
-                deleteButton.Enabled = false;
-                editButton.Enabled = false;
-            }
+            
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -154,18 +148,23 @@ namespace LabTask
             
             deleteButton.Enabled = true;
             editButton.Enabled = true;
-
-            SqlConnection con = new SqlConnection("Data Source=DESKTOP-HER71UT;Initial Catalog=LabTask;Integrated Security=True");
-            SqlCommand cmd = new SqlCommand("SELECT *FROM StudentData WHERE " + searchBox.Text + " = @RegistrationNo", con);
-            cmd.Parameters.AddWithValue("@RegistrationNo", regNoBox.Text);
+            //string reg = searchBox.Text;
+            SqlConnection cn = new SqlConnection("Data Source=DESKTOP-HER71UT;Initial Catalog=LabTask;Integrated Security=True");
+            SqlCommand cmd = new SqlCommand("Select * from StudentData Where RegistrationNo = '"+ textBox1.Text+ "'", cn);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
-            con.Open();
-            SqlDataReader sdr = cmd.ExecuteReader();
-            dt.Load(sdr);
-            con.Close();
+            da.Fill(dt);
             dataGridView1.DataSource = dt;
 
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+            if (textBox1.Text.Contains(""))
+            {
+                deleteButton.Enabled = false;
+                editButton.Enabled = false;
+            }
         }
     }
 }
